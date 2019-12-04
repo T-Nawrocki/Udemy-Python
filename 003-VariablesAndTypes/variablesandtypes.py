@@ -26,7 +26,7 @@ print(type(name))
 age = "27 years"  # the variable is rebound to a string value. This is not changing the type of the values though.
 
 # Python is still strongly typed—eg you cannot concatenate string and int
-print(name + " is " + 27 + " years old") # this causes an error—note highlighting of invalidly typed value
+# print(name + " is " + 27 + " years old") # this causes an error—note highlighting of invalidly typed value
 
 ##############################################
 
@@ -50,4 +50,5 @@ print(name + " is " + 27 + " years old") # this causes an error—note highlight
 # float's maximum value on a 64-bit computer is ~1.8e+308
 # float's minimum value on a 64-bit computer is ~2.2e-308 floats have 52 digit precision.
 # If you need more, the decimal data type can handle that, but we won't need that for this course
+
 
