@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e149a9f2-cc15-42ee-a55e-fb8cdae3018b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/006-ProgramFlowControl/08-while.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/006-ProgramFlowControl/09betterguessinggame.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/007-ListsRangesTuples/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/007-ListsRangesTuples/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/007-ListsRangesTuples/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/007-ListsRangesTuples/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/007-ListsRangesTuples/007-ListsRangesTuples.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/007-ListsRangesTuples/01-lists.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/007-ListsRangesTuples/02-iterators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/007-ListsRangesTuples/ranges.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge2-ProgramFlow/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge2-ProgramFlow/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge2-ProgramFlow/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge2-ProgramFlow/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge2-ProgramFlow/Challenge2-ProgramFlow.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge2-ProgramFlow/challenge.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge3-WhileLoop/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge3-WhileLoop/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge3-WhileLoop/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge3-WhileLoop/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge3-WhileLoop/Challenge3-WhileLoop.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge3-WhileLoop/guessinggame.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge4-Lists/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge4-Lists/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge4-Lists/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge4-Lists/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge4-Lists/Challenge4-Lists.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge4-Lists/listchallenge.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge5-Iterators/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge5-Iterators/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge5-Iterators/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge5-Iterators/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge5-Iterators/Challenge5-Iterators.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Challenge5-Iterators/iterator challenge.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1Uh3geEbCMK8YqPgAlboFZuXJ9L" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e149a9f2-cc15-42ee-a55e-fb8cdae3018b" name="Default Changelist" comment="" />
+      <created>1575795111943</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575795111943</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1061" y="455" key="FileChooserDialogImpl" timestamp="1575795254455">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1061" y="455" key="FileChooserDialogImpl/0.0.2560.1400/3840.506.1920.1040@0.0.2560.1400" timestamp="1575795254455" />
+  </component>
+</project>
