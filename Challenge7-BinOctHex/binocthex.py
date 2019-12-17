@@ -20,5 +20,57 @@
 #
 # Once the program is working, modify it to print Octal rather than binary.
 
-number_input = input("Please enter a whole number between 0 and 65536: ")
+minimum = 0  # can change these values to alter valid range for calculator
+maximum = 65535  # default max is 65535 ((2 ** 16) - 1)
+
+# populates powers_of_2 with values up to maximum
+powers_of_2 = []
+i = 0
+while (2 ** i) <= maximum:
+    powers_of_2.append(2 ** i)
+    i += 1
+powers_of_2.reverse()  # sorts list from largest to smallest
+
+
+# validates number input to only allow digits
+def number_input():
+    while True:
+        try:
+            user_input = int(input(f"Please enter a whole number between {minimum} and {maximum}: "))
+        except ValueError:
+            print("That's not a valid whole number. Please try again.")
+        else:
+            return user_input
+
+
+decimal = number_input()
+# validates number input against min/max values
+while True:
+    if decimal < minimum:
+        print("That value is too small. Please try again.")
+        decimal = number_input()
+    elif decimal > maximum:
+        print("That value is too large. Please try again.")
+        decimal = number_input()
+    else:
+        break
+
+remainder = decimal  # remainder is a working value to track remainder of number which hasn't been converted yet
+answer = ""  # initialise answer string so we can append to it
+
+for power in powers_of_2:
+    if remainder // power > 0:
+        answer += "1"
+        remainder = remainder % power
+    else:
+        answer += "0"
+
+for char in answer:  # strips leading 0
+    if char == "0" and len(answer) > 1:  # need len(answer) > 1 to account for where the answer is 0
+        answer = answer[1::]
+    else:  # when you hit the first non-zero character, stop strippinɡ characters
+        break
+
+print(f"{decimal} in binary is {answer}")
+
 
