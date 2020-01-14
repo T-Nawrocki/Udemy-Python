@@ -4,13 +4,22 @@ import os
 main_window = tkinter.Tk()
 main_window.title("Advanced GUI Example")
 main_window.geometry("640x480+600+200")
+main_window["padx"] = 8  # adds 8px internal x padding
 
 # configure row and column weights
-main_window.columnconfigure(0, weight=1)
-main_window.columnconfigure(1, weight=1)
-main_window.columnconfigure(2, weight=3)
-main_window.columnconfigure(3, weight=3)
-main_window.columnconfigure(4, weight=3)
+# weight doesn't need to be very precise—if all of these were 1, horizontal alignment would be almost identical
+# this is because for the most part, cell size is determined by the size of the widgets placed in them
+# the weight property is most useful when the window is resized
+# a column with a weight of 3 will widen 3 times faster than a column with a weight of 1 when window size expands
+# when putting two widgets in the same cell (eg Label and Entry), it's generally a good idea ti
+# give the row low weight, so they stay close to each other when the window expands
+# weight can be even more important when shrinking a window, because that's when you get widgets collapsing
+# into each other, text getting clipped off, etc unless you protect those widgets with low relative weight
+main_window.columnconfigure(0, weight=100)
+main_window.columnconfigure(1, weight=1)  # scroll bar column—low weight to prevent it folding into Listbox
+main_window.columnconfigure(2, weight=1000)
+main_window.columnconfigure(3, weight=600)   # OK button column—lower weight than Cancel button column because
+main_window.columnconfigure(4, weight=1000)  # OK button is about half the size of the Cancel button
 main_window.rowconfigure(0, weight=1)
 main_window.rowconfigure(1, weight=10)
 main_window.rowconfigure(2, weight=1)
@@ -115,6 +124,18 @@ day_spinner.grid(column=0, row=1)
 month_spinner.grid(column=1, row=1)
 year_spinner.grid(column=2, row=1)
 
+# Buttons
+# aligned to right-bottom corner
+# cancel button quits the window (destroy used because it stops the main loop and deletes the widgets,
+# quit does this and also stops the interpreter, which can cause problems if you have post-window cleanup)
+# NOTE—We do not put () after a command assignment
+# this is because if you call the function, its RESULT will be assigned to command
+# the result of destroy()/quit() is None, so the command will do nothing
+# if you don't add (), the actual function itself is assigned to command, which is the behaviour we want
+ok_button = tkinter.Button(main_window, text="OK")
+cancel_button = tkinter.Button(main_window, text="Cancel", command=main_window.destroy)
+ok_button.grid(column=3, row=4, sticky="e")
+cancel_button.grid(column=4, row=4, sticky="w")
 
 # ACTUALLY OPEN THE WINDOW AND RUN EVERYTHING
 main_window.mainloop()
