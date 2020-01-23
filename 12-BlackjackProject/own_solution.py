@@ -16,8 +16,8 @@
 # EXTENSION: multiple players, determined by the user
 # EXTENSION: betting functionality
 # ==================================================
-# TODO: Define cards
-# TODO: Deal initial cards
+# TODO: End turn function (tie to Stand button)
+# TODO: Track for bust (if so, trigger end turn regardless)
 
 # ==================================================
 # MODULES
@@ -28,8 +28,11 @@ import random
 
 
 # ==================================================
-# FUNCTIONS
+# FUNCTIONS AND GLOBAL VARIABLES
 # ==================================================
+
+active_player = 1
+
 
 # load images function
 # takes a list of cards as an argument
@@ -63,7 +66,7 @@ def load_cards(card_list):
 # removes dealt card from deck
 # displays dealt card to active player's card frame
 def deal_card(player):
-    next_card = deck.pop()  # .pop() removes item at given index (default = end of list), then returns the removed item
+    next_card = deck.pop(0)  # .pop() removes item at given index (default = end of list), then returns the removed item
     player["hand"].append(next_card)
     tkinter.Label(player["frame"], image=next_card["image"], relief="raised").pack(side="left")
     # can't use pack and grid in the same window/widget, however we're not adding anything to the card frames
@@ -96,11 +99,28 @@ def display_score(player):
     player["score_display"].set(calculate_score(player))
 
 
+# TODO: Probably broken
+def end_turn(active_player_number):
+    if active_player_number + 1 > len(players):
+        active_player_number = 0
+    else:
+        active_player_number += 1
+    set_turn_status_display(players[active_player_number])
+
+
 # command function for hit button
 # consists of dealing a card to the player, calculating their new score, then displaying it
+# also works out if the player is bust, and if so ends their turn
 def hit(player):
     deal_card(player)
     display_score(player)
+    if calculate_score(player) >= 21:
+        end_turn(active_player)  # TODO: Will need fixing if end_turn changes
+
+
+# sets turn status display text for current active player
+def set_turn_status_display(player):
+    status_text.set(f"It's {player['name']}'s turn.")
 
 
 # ==================================================
@@ -169,9 +189,8 @@ action_frame["pady"] = 3
 # becomes equal to the result of the function being called, not hte function itself
 # lambda expressions avoid this, but we haven't covered them yet
 # so for now don't worry about it (although in this case it seems pretty self-explanatory)
-# TODO fix player dictionary reference
 hit_button = tkinter.Button(action_frame, text="Hit", height=2, width=10,
-                            command=lambda: hit(players[1]))  # just player 1 in this version
+                            command=lambda: hit(players[active_player]))
 hit_button.grid(column=0, row=0, sticky=tkinter.NE)
 
 # stick button
@@ -185,12 +204,14 @@ stick_button.grid(column=1, row=0, sticky=tkinter.NE)
 players = [{"name": "Dealer",
             "hand": [],
             "frame": dealer_card_frame,
-            "score_display": dealer_score},
+            "score_display": dealer_score,
+            "turn_ended": False},
 
            {"name": "Player 1",
             "hand": [],
             "frame": player_1_card_frame,
-            "score_display": player_1_score}]
+            "score_display": player_1_score,
+            "turn_ended": False}]
 
 
 # ==================================================
@@ -210,9 +231,9 @@ print(f"Shuffled deck: {deck}")
 print()
 
 # deal first card to each player
-for player in players:
-    hit(player)
+for p in players:
+    hit(p)
 
-
+set_turn_status_display(players[active_player])
 
 main_window.mainloop()
