@@ -27,14 +27,18 @@ import tkinter
 import random
 
 
+# ==================================================
+# FUNCTIONS
+# ==================================================
+
 # load images function
 # takes a list of cards as an argument
 # then for each suit, loops through all cards and appends a tuple of (suit, card, value, image) to the list of cards
 def load_cards(card_list):
-    suits = ["heart", "club", "diamond", "spade"]
+    suits = ["heart", "club", "diamond", "spade"]  # suits based on card image names
     face_cards = ["jack", "queen", "king"]
     for suit in suits:
-        name=f"cards/1_{suit}.png"
+        name = f"cards/1_{suit}.png"
         card_list.append({"suit": suit,
                           "card": "ace",
                           "value": 11,
@@ -59,14 +63,44 @@ def load_cards(card_list):
 # removes dealt card from deck
 # displays dealt card to active player's card frame
 def deal_card(player):
-    next_card = deck.pop()  # .pop() removes item at given index (default 0), then returns the removed item
+    next_card = deck.pop()  # .pop() removes item at given index (default = end of list), then returns the removed item
     player["hand"].append(next_card)
-    player["score"] += next_card["value"]
     tkinter.Label(player["frame"], image=next_card["image"], relief="raised").pack(side="left")
+    # can't use pack and grid in the same window/widget, however we're not adding anything to the card frames
+    # except the cards being packed this way, so it shouldn't be a problem
 
     print(f"{next_card['card']} of {next_card['suit']} was dealt to {player['name']}.")
-    print(f"{player['name']}'s score is now {player['score']}")
+    print(f"{player['name']}'s score is now {calculate_score(player)}")
     print()
+
+
+# calculates score for player argument
+# uses two for loops so that aces are checked after adding values of all other cards
+# this enables ace to be 1 or 11, depending on what's best for the player
+def calculate_score(player):
+    score = 0
+    for card in player["hand"]:
+        if card["card"] != "ace":
+            score += card["value"]
+    for card in player["hand"]:
+        if card["card"] == "ace":
+            if (score + 11) > 21:
+                score += 1
+            else:
+                score += 11
+    return score
+
+
+# sets relevant score display to score calculated for that player
+def display_score(player):
+    player["score_display"].set(calculate_score(player))
+
+
+# command function for hit button
+# consists of dealing a card to the player, calculating their new score, then displaying it
+def hit(player):
+    deal_card(player)
+    display_score(player)
 
 
 # ==================================================
@@ -131,7 +165,13 @@ action_frame.grid(column=0, row=2, sticky="news")
 action_frame["pady"] = 3
 
 # hit button
-hit_button = tkinter.Button(action_frame, text="Hit", height=2, width=10)
+# passing arguments to a command function isn't possible, because as soon as you add (), the command
+# becomes equal to the result of the function being called, not hte function itself
+# lambda expressions avoid this, but we haven't covered them yet
+# so for now don't worry about it (although in this case it seems pretty self-explanatory)
+# TODO fix player dictionary reference
+hit_button = tkinter.Button(action_frame, text="Hit", height=2, width=10,
+                            command=lambda: hit(players[1]))  # just player 1 in this version
 hit_button.grid(column=0, row=0, sticky=tkinter.NE)
 
 # stick button
@@ -139,20 +179,19 @@ stick_button = tkinter.Button(action_frame, text="Stand", height=2, width=10)
 stick_button.grid(column=1, row=0, sticky=tkinter.NE)
 
 # ==================================================
-# PLAYER DICTIONARIES
+# PLAYER LIST
 # ==================================================
 
-dealer = {"name": "Dealer",
-          "hand": [],
-          "frame": dealer_card_frame,
-          "score": 0,
-          "seat": 1}
-player_1 = {"name": "Player 1",
+players = [{"name": "Dealer",
+            "hand": [],
+            "frame": dealer_card_frame,
+            "score_display": dealer_score},
+
+           {"name": "Player 1",
             "hand": [],
             "frame": player_1_card_frame,
-            "score": 0,
-            "seat": 2}
-number_of_seats = 2  # remember to update if adding new players
+            "score_display": player_1_score}]
+
 
 # ==================================================
 # GAME LOGIC
@@ -170,8 +209,10 @@ random.shuffle(deck)
 print(f"Shuffled deck: {deck}")
 print()
 
-deal_card(dealer)
-deal_card(player_1)
-deal_card(dealer)
+# deal first card to each player
+for player in players:
+    hit(player)
+
+
 
 main_window.mainloop()
