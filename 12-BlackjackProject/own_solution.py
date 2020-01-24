@@ -16,9 +16,7 @@
 # EXTENSION: multiple players, determined by the user
 # EXTENSION: betting functionality
 # ==================================================
-# TODO: End turn function (tie to Stand button)
-# TODO: Track for bust (if so, trigger end turn regardless)
-
+# TODO: End game after all players have had their turn
 # ==================================================
 # MODULES
 # ==================================================
@@ -99,13 +97,33 @@ def display_score(player):
     player["score_display"].set(calculate_score(player))
 
 
-# TODO: Probably broken
-def end_turn(active_player_number):
-    if active_player_number + 1 > len(players):
-        active_player_number = 0
+# ends turn, incrementing active player unless we've hit the total number of players,
+# at which point active player becomes 0 (dealer)
+# if active player is 0 (dealer), do not change active player because game will be over
+# instead, trigger end game function
+# global active_player tells the function to us the global variable active_player, rather than creating a local variable
+# this is generally not the best idea, as the best thing is usually to have functions be self-contained
+# however here active_player is not really used much elsewhere (other than the button commands)
+# and we really just want to have a reusable way of changing the active player number
+def end_turn():
+    global active_player
+    print(f"Player {active_player} ({players[active_player]['name']}) turn end.")
+    if active_player != 0:
+        if active_player + 1 >= len(players):
+            active_player = 0
+        else:
+            active_player += 1
+        print(f"New active player: Player {active_player} ({players[active_player]['name']})")
+        print()
     else:
-        active_player_number += 1
-    set_turn_status_display(players[active_player_number])
+        end_game()
+
+
+# TODO
+# ends the game (possibly with a popup, and an option to either quit or restart?)
+def end_game():
+    print("Game over (NOT YET IMPLEMENTED)")
+    return NotImplementedError
 
 
 # command function for hit button
@@ -114,13 +132,21 @@ def end_turn(active_player_number):
 def hit(player):
     deal_card(player)
     display_score(player)
-    if calculate_score(player) >= 21:
-        end_turn(active_player)  # TODO: Will need fixing if end_turn changes
+    if calculate_score(player) == 21:
+        print(f"{player['name']} blackjack.")
+        end_turn()
+        status_text.set(f"{player['name']} has a blackjack! It's {players[active_player]['name']}'s turn.")
+    elif calculate_score(player) > 21:
+        print(f"{player['name']} bust.")
+        end_turn()
+        status_text.set(f"{player['name']} is bust. It's {players[active_player]['name']}'s turn.")
 
 
-# sets turn status display text for current active player
-def set_turn_status_display(player):
-    status_text.set(f"It's {player['name']}'s turn.")
+def stand(player):
+    print(f"{player['name']} stands.")
+    end_turn()
+    status_text.set(f"{player['name']} stands, with a score of {calculate_score(player)}. "
+                    f"It's {players[active_player]['name']}'s turn.")
 
 
 # ==================================================
@@ -193,9 +219,10 @@ hit_button = tkinter.Button(action_frame, text="Hit", height=2, width=10,
                             command=lambda: hit(players[active_player]))
 hit_button.grid(column=0, row=0, sticky=tkinter.NE)
 
-# stick button
-stick_button = tkinter.Button(action_frame, text="Stand", height=2, width=10)
-stick_button.grid(column=1, row=0, sticky=tkinter.NE)
+# stand button
+stand_button = tkinter.Button(action_frame, text="Stand", height=2, width=10,
+                              command=lambda: stand(players[active_player]))
+stand_button.grid(column=1, row=0, sticky=tkinter.NE)
 
 # ==================================================
 # PLAYER LIST
@@ -204,14 +231,12 @@ stick_button.grid(column=1, row=0, sticky=tkinter.NE)
 players = [{"name": "Dealer",
             "hand": [],
             "frame": dealer_card_frame,
-            "score_display": dealer_score,
-            "turn_ended": False},
+            "score_display": dealer_score},
 
            {"name": "Player 1",
             "hand": [],
             "frame": player_1_card_frame,
-            "score_display": player_1_score,
-            "turn_ended": False}]
+            "score_display": player_1_score}]
 
 
 # ==================================================
@@ -230,10 +255,12 @@ random.shuffle(deck)
 print(f"Shuffled deck: {deck}")
 print()
 
-# deal first card to each player
+# deal first card to each player, and second card to dealer.
 for p in players:
     hit(p)
+hit(players[0])
 
-set_turn_status_display(players[active_player])
+# set initial status text to let player 1 know it's their turn.
+status_text.set(f"It's {players[active_player]['name']}'s turn.")
 
 main_window.mainloop()
