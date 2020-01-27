@@ -16,20 +16,23 @@
 # EXTENSION: multiple players, determined by the user
 # EXTENSION: betting functionality
 # ==================================================
-# TODO: End game after all players have had their turn
+# TODO: Make dealer smarter, so it doesn't give up after 17 if there's a player with a winning hand
+# TODO: Have a restart or quit option after the game has ended
+# TODO: Improve display of winner (eg with a popup)
 # ==================================================
 # MODULES
 # ==================================================
 
 import tkinter
 import random
-
+import time
 
 # ==================================================
 # FUNCTIONS AND GLOBAL VARIABLES
 # ==================================================
 
-active_player = 1
+active_player = 1  # active player index (starts at 1, player 0 is dealer who goes last)
+delay = 1  # seconds of delay for actions during end-game sequence
 
 
 # load images function
@@ -98,9 +101,7 @@ def display_score(player):
 
 
 # ends turn, incrementing active player unless we've hit the total number of players,
-# at which point active player becomes 0 (dealer)
-# if active player is 0 (dealer), do not change active player because game will be over
-# instead, trigger end game function
+# at which point active player becomes 0 (dealer) and the game end function is called
 # global active_player tells the function to us the global variable active_player, rather than creating a local variable
 # this is generally not the best idea, as the best thing is usually to have functions be self-contained
 # however here active_player is not really used much elsewhere (other than the button commands)
@@ -111,42 +112,126 @@ def end_turn():
     if active_player != 0:
         if active_player + 1 >= len(players):
             active_player = 0
+            print()
+            end_game()
         else:
             active_player += 1
         print(f"New active player: Player {active_player} ({players[active_player]['name']})")
         print()
     else:
-        end_game()
+        print()
 
 
-# TODO
-# ends the game (possibly with a popup, and an option to either quit or restart?)
+# ends the game
+# disabled buttons, then processes dealer's turn, and determines winner
 def end_game():
-    print("Game over (NOT YET IMPLEMENTED)")
-    return NotImplementedError
+    print("Game over sequence starts")
+    hit_button["state"] = "disabled"
+    stand_button["state"] = "disabled"
+    dealer_turn()
+    determine_winner()
+    restart_or_quit()
 
 
 # command function for hit button
 # consists of dealing a card to the player, calculating their new score, then displaying it
 # also works out if the player is bust, and if so ends their turn
 def hit(player):
+    if active_player + 1 >= len(players):
+        next_player = players[0]
+    else:
+        next_player = players[active_player + 1]
     deal_card(player)
     display_score(player)
     if calculate_score(player) == 21:
         print(f"{player['name']} blackjack.")
+        status_text.set(f"{player['name']} has a blackjack! It's {next_player['name']}'s turn.")
         end_turn()
-        status_text.set(f"{player['name']} has a blackjack! It's {players[active_player]['name']}'s turn.")
     elif calculate_score(player) > 21:
         print(f"{player['name']} bust.")
+        status_text.set(f"{player['name']} is bust. It's {next_player['name']}'s turn.")
         end_turn()
-        status_text.set(f"{player['name']} is bust. It's {players[active_player]['name']}'s turn.")
 
 
+# ends player turn and prints their final score
 def stand(player):
+    if active_player + 1 >= len(players):
+        next_player = players[0]
+    else:
+        next_player = players[active_player + 1]
     print(f"{player['name']} stands.")
-    end_turn()
     status_text.set(f"{player['name']} stands, with a score of {calculate_score(player)}. "
-                    f"It's {players[active_player]['name']}'s turn.")
+                    f"It's {next_player['name']}'s turn.")
+    end_turn()
+
+
+# handles dealer's turn, hitting until dealer score is >= 17, then standing
+# dealer's actions will be on a delay
+# TODO: Make this smarter—shouldn't give up after 17 if player has a winning score
+def dealer_turn():
+    print("Dealer's turn starts.")
+    print()
+    dealer = players[0]
+    main_window.update()
+    while calculate_score(dealer) < 17:
+        time.sleep(delay)
+        hit(dealer)
+    else:
+        stand(dealer)
+
+
+# determines winner of the game based on scores, then prints winner to status display
+# appends non-bust players to list of potential winners
+# if there are no potential winners, print output to that effect and end function
+# sorts list of potential winners from highest score to lowest
+# appends potential winners with highest score to list of winners
+# p
+def determine_winner():
+    print("Determine winner sequence begin.")
+    main_window.update()
+    time.sleep(delay)
+
+    potential_winners = []
+    winners = []
+
+    for player in players:
+        if calculate_score(player) <= 21:
+            potential_winners.append(player)
+
+    potential_winners.sort(key=calculate_score, reverse=True)
+    print(f"Non-bust players: {potential_winners}")
+    print()
+
+    if not potential_winners:
+        status_text.set("All players are bust! There is no winner...")
+        print("All players bust, DRAW—NO WINNER")
+        print()
+    else:
+        for player in potential_winners:
+            if calculate_score(player) == calculate_score(potential_winners[0]):
+                winners.append(player)
+        if len(winners) == 1:
+            status_text.set(f"{winners[0]['name']} wins, with a score of {calculate_score(winners[0])}!")
+            print(f"Winner: {winners[0]['name']}")
+            print(f"Winning score: {calculate_score(winners[0])}")
+            print()
+        else:
+            win_status_text = "It's a draw! "
+            for winner in winners[:-1]:
+                win_status_text += f"{winner['name']}, "
+            win_status_text = win_status_text.rstrip(", ")
+            win_status_text += f" and {winners[-1]['name']} win, with a score of {calculate_score(winners[0])}!"
+            status_text.set(win_status_text)
+            print(f"Winners: {winners}")
+            print(f"Winning score: {calculate_score(winners[0])}")
+            print()
+
+
+# offers player the option to restart or quit
+def restart_or_quit():
+    # TODO
+    print("restart or quit (NOT YET IMPLEMENTED)")
+    return NotImplementedError()
 
 
 # ==================================================
