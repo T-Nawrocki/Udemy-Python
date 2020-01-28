@@ -16,23 +16,62 @@
 # EXTENSION: multiple players, determined by the user
 # EXTENSION: betting functionality
 # ==================================================
-# TODO: Make dealer smarter, so it doesn't give up after 17 if there's a player with a winning hand
-# TODO: Have a restart or quit option after the game has ended
-# TODO: Improve display of winner (eg with a popup)
+
 # ==================================================
 # MODULES
 # ==================================================
 
 import tkinter
+import tkinter.messagebox
 import random
 import time
 
 # ==================================================
-# FUNCTIONS AND GLOBAL VARIABLES
+# GLOBAL VARIABLES
 # ==================================================
 
 active_player = 1  # active player index (starts at 1, player 0 is dealer who goes last)
 delay = 1  # seconds of delay for actions during end-game sequence
+cards = []  # list of all cards which have been loaded
+deck = []  # current deck
+
+# ==================================================
+# START OF GAME FUNCTIONS
+# ==================================================
+
+
+# starts a new game
+def start_new_game():
+    global deck
+    global cards
+    global active_player
+
+    # load the cards
+    cards = []  # unload any existing cards
+    load_cards(cards)
+    print(f"Cards loaded: {cards}")
+    print()
+
+    # create a new deck of cards, and shuffle them.
+    deck = list(cards)  # use list() to make it a new object
+    random.shuffle(deck)
+    print(f"Shuffled deck: {deck}")
+    print()
+
+    # deal first card to each player, and second card to dealer.
+    for p in players:
+        hit(p)
+    hit(players[0])
+
+    # set initial status text to let player 1 know it's their turn.
+    status_text.set(f"It's {players[active_player]['name']}'s turn.")
+
+    # enables buttons (if disabled)
+    hit_button["state"] = "normal"
+    stand_button["state"] = "normal"
+
+    # sets active player to 1
+    active_player = 1
 
 
 # load images function
@@ -61,6 +100,11 @@ def load_cards(card_list):
                               "card": card,
                               "value": 10,
                               "image": image})
+
+
+# ==================================================
+# GAMEPLAY FUNCTIONS
+# ==================================================
 
 
 # deals a card from the deck to the active player
@@ -100,39 +144,6 @@ def display_score(player):
     player["score_display"].set(calculate_score(player))
 
 
-# ends turn, incrementing active player unless we've hit the total number of players,
-# at which point active player becomes 0 (dealer) and the game end function is called
-# global active_player tells the function to us the global variable active_player, rather than creating a local variable
-# this is generally not the best idea, as the best thing is usually to have functions be self-contained
-# however here active_player is not really used much elsewhere (other than the button commands)
-# and we really just want to have a reusable way of changing the active player number
-def end_turn():
-    global active_player
-    print(f"Player {active_player} ({players[active_player]['name']}) turn end.")
-    if active_player != 0:
-        if active_player + 1 >= len(players):
-            active_player = 0
-            print()
-            end_game()
-        else:
-            active_player += 1
-        print(f"New active player: Player {active_player} ({players[active_player]['name']})")
-        print()
-    else:
-        print()
-
-
-# ends the game
-# disabled buttons, then processes dealer's turn, and determines winner
-def end_game():
-    print("Game over sequence starts")
-    hit_button["state"] = "disabled"
-    stand_button["state"] = "disabled"
-    dealer_turn()
-    determine_winner()
-    restart_or_quit()
-
-
 # command function for hit button
 # consists of dealing a card to the player, calculating their new score, then displaying it
 # also works out if the player is bust, and if so ends their turn
@@ -165,19 +176,71 @@ def stand(player):
     end_turn()
 
 
+# ends turn, incrementing active player unless we've hit the total number of players,
+# at which point active player becomes 0 (dealer) and the game end function is called
+# global active_player tells the function to us the global variable active_player, rather than creating a local variable
+# this is generally not the best idea, as the best thing is usually to have functions be self-contained
+# however here active_player is not really used much elsewhere (other than the button commands)
+# and we really just want to have a reusable way of changing the active player number
+def end_turn():
+    global active_player
+    print(f"Player {active_player} ({players[active_player]['name']}) turn end.")
+    if active_player != 0:
+        if active_player + 1 >= len(players):
+            active_player = 0
+            print()
+            end_game()
+        else:
+            active_player += 1
+        print(f"New active player: Player {active_player} ({players[active_player]['name']})")
+        print()
+    else:
+        print()
+
+
+# ==================================================
+# END GAME FUNCTIONS
+# ==================================================
+
+
+# ends the game
+# disabled buttons, then processes dealer's turn, and determines winner
+def end_game():
+    print("Game over sequence starts")
+    hit_button["state"] = "disabled"
+    stand_button["state"] = "disabled"
+    dealer_turn()
+    determine_winner()
+    game_over_popup()
+
+
 # handles dealer's turn, hitting until dealer score is >= 17, then standing
 # dealer's actions will be on a delay
-# TODO: Make this smarter—shouldn't give up after 17 if player has a winning score
 def dealer_turn():
     print("Dealer's turn starts.")
     print()
+
     dealer = players[0]
+    player_scores = []
+    for player in players[1::]:  # need [1::] so dealer isn't comparing against their own score
+        if calculate_score(player) < 22:
+            player_scores.append(calculate_score(player))
+    player_scores.sort(reverse=True)  # sort player scores from highest to lowest
+    print(f"Player scores to beat are: {player_scores}")
+
     main_window.update()
-    while calculate_score(dealer) < 17:
+
+    if not player_scores:  # if all players are bust, guaranteed to win if we just stand
         time.sleep(delay)
-        hit(dealer)
-    else:
         stand(dealer)
+    else:
+        # hit while dealer score is not winning and is < 17
+        while calculate_score(dealer) < 17 and not calculate_score(dealer) > player_scores[0]:
+            time.sleep(delay)
+            hit(dealer)
+        else:
+            time.sleep(delay)
+            stand(dealer)
 
 
 # determines winner of the game based on scores, then prints winner to status display
@@ -227,11 +290,35 @@ def determine_winner():
             print()
 
 
-# offers player the option to restart or quit
-def restart_or_quit():
-    # TODO
-    print("restart or quit (NOT YET IMPLEMENTED)")
-    return NotImplementedError()
+# opens a popup which displays the winner, and offers options to quit or restart
+def game_over_popup():
+    print("Displaying popup window—requesting restart")
+    popup_window = tkinter.messagebox.askyesno(title="Game Over",
+                                               message=f"{status_text.get()} Would you like to play again?",
+                                               icon="info")
+    print(f"User has selected {popup_window}.")
+    if popup_window:
+        print("Game will restart.")
+        restart()
+    else:
+        print("Closing game...")
+        main_window.destroy()
+
+
+# restarts game by emptying player hands, destroying all child widgets in card frames, then calling start_new_game()
+def restart():
+    print("Restarting Game...")
+    for player in players:
+        player['hand'] = []
+        for child in player['frame'].winfo_children():
+            child.destroy()
+        print(f"{player['name']}'s hand is now {player['hand']} and their frame contains the following child widgets:")
+        print(f"{player['frame'].winfo_children()}")
+    print()
+    print("=" * 40)
+    print()
+
+    start_new_game()
 
 
 # ==================================================
@@ -309,6 +396,11 @@ stand_button = tkinter.Button(action_frame, text="Stand", height=2, width=10,
                               command=lambda: stand(players[active_player]))
 stand_button.grid(column=1, row=0, sticky=tkinter.NE)
 
+# # restart button
+# # for debugging only
+# restart_button = tkinter.Button(action_frame, text="Restart", height=2, width=10, command=restart)
+# restart_button.grid(column=2, row=0, sticky=tkinter.NE)
+
 # ==================================================
 # PLAYER LIST
 # ==================================================
@@ -328,24 +420,6 @@ players = [{"name": "Dealer",
 # GAME LOGIC
 # ==================================================
 
-# load the cards
-cards = []
-load_cards(cards)
-print(f"Cards loaded: {cards}")
-print()
-
-# create a new deck of cards, and shuffle them.
-deck = list(cards)  # use list() to make it a new object
-random.shuffle(deck)
-print(f"Shuffled deck: {deck}")
-print()
-
-# deal first card to each player, and second card to dealer.
-for p in players:
-    hit(p)
-hit(players[0])
-
-# set initial status text to let player 1 know it's their turn.
-status_text.set(f"It's {players[active_player]['name']}'s turn.")
+start_new_game()
 
 main_window.mainloop()
