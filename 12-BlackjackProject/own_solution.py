@@ -40,6 +40,12 @@ deck = []  # current deck
 # ==================================================
 
 
+# runs the game itself
+def run_game():
+    start_new_game()
+    main_window.mainloop()
+
+
 # starts a new game
 def start_new_game():
     global deck
@@ -415,11 +421,17 @@ players = [{"name": "Dealer",
             "frame": player_1_card_frame,
             "score_display": player_1_score}]
 
-
 # ==================================================
 # GAME LOGIC
 # ==================================================
 
-start_new_game()
-
-main_window.mainloop()
+# the python interpreter assigns values to certain variables before executing the code
+# one of these variables is __name__, which is set to "__main__" if the module is the main program being run
+# if not (ie if the module has been imported by another program), it will be set to the file name
+# by wrapping our execution code in this conditional statement, we ensure that it does not automatically run
+# unless it is being run as the main program
+# (without this conditional, the code would execute on import to the other program)
+# to execute the code where it's been imported as a module to another program, we need to have a function which
+# causes the mainloop and any other necessary code to run (in this case, run_game())
+if __name__ == '__main__':
+    run_game()
