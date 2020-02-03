@@ -14,6 +14,9 @@ Attribute: A variable bound to an instance of a class.
 
 class Kettle(object):
 
+    # class variables—have the same value for each instance of the class
+    power_source = "electricity"
+
     # self is a parameter which refers to the object the method is being called on.
     #
     # While it is technically a parameter, and so could be called anything, the convention is to use "self"
@@ -27,6 +30,7 @@ class Kettle(object):
     # Constructors are a method which are called when an instance of a class is created
     def __init__(self, make, price):
 
+        # instance variables—can have different values for each instance of the class
         self.make = make
         self.price = price
         self.on = False
@@ -38,8 +42,11 @@ class Kettle(object):
 
 # can create new attributes on the fly—does not need to be within the class constructor
 # when you do this, you can end up with two instances of a class having different attributes
-# generally this is a terrible idea
+# this is generally not a great idea
 # it's more here to demonstrate that mistyping the name of an attribute could end up creating a new attribute
 # rather than raising an error like other languages would do
 kenwood = Kettle("Kenwood", 8.99)
 kenwood.power = 1.5
+
+print(kenwood.power_source)
+print(Kettle.__dict__)
