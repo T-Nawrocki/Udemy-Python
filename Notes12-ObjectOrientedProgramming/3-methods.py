@@ -10,7 +10,7 @@ import datetime
 import pytz
 
 
-class Account(object):
+class Account:
     """ A simple bank account Class with balance """
 
     # Because this method does not actually use self anywhere in the definition,
@@ -33,39 +33,39 @@ class Account(object):
     # Python 3 only has the new-style classes, but versions between 2.2 and 3 have both.
     # We will look at the old-style classes briefly later on.
     def __init__(self, name, balance):
-        self.name = name
-        self.balance = balance
-        self.transaction_list = [(Account._current_time(), self.balance)]
-        print(f"Account created: name = {self.name}; balance = {self.balance}")
+        self._name = name
+        self._balance = balance
+        self._transaction_list = [(Account._current_time(), self._balance)]  # starts containing only initial balance
+        print(f"Account created: name = {self._name}; balance = {self._balance}")
 
     def deposit(self, amount):
         if amount > 0:
-            self.balance += amount
+            self._balance += amount
             # append tuple containing utc localised datetime and amount to transaction list
             # could call _current_time() on self instead, but result is the same and performance is slightly worse
             # because python has to load the instance and class, not just class, so generally do it this way
-            self.transaction_list.append((Account._current_time(), amount))
-            print(f"{amount} deposited into account {self.name}.")
+            self._transaction_list.append((Account._current_time(), amount))
+            print(f"{amount} deposited into account {self._name}.")
             self.show_balance()
 
     def withdraw(self, amount):
         if amount > 0:
-            if self.balance >= amount:
-                self.balance -= amount
+            if self._balance >= amount:
+                self._balance -= amount
                 # append tuple containing utc localised datetime and negative amount to transaction list
-                self.transaction_list.append((Account._current_time(), -amount))
-                print(f"{amount} withdrawn from account {self.name}.")
+                self._transaction_list.append((Account._current_time(), -amount))
+                print(f"{amount} withdrawn from account {self._name}.")
                 self.show_balance()
             else:
-                print(f"Attempted to withdraw {amount} from account {self.name}, but funds insufficient.")
+                print(f"Attempted to withdraw {amount} from account {self._name}, but funds insufficient.")
                 self.show_balance()
 
     def show_balance(self):
-        print(f"Balance = {self.balance}")
+        print(f"Balance = {self._balance}")
 
     def show_transactions(self):
-        for date, amount in self.transaction_list:
-            print(f"{date.astimezone()}: {amount} (balance = {self.balance})")
+        for date, amount in self._transaction_list:
+            print(f"{date.astimezone()}: {amount}")
 
 
 if __name__ == '__main__':

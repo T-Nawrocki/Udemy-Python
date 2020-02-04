@@ -12,7 +12,7 @@ Attribute: A variable bound to an instance of a class.
 # but in Python a class is exactly the same thing as a TYPE
 
 
-class Kettle(object):
+class Kettle:
 
     # class variables—have the same value for each instance of the class
     power_source = "electricity"
