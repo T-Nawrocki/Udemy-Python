@@ -156,6 +156,8 @@ def load_data():
     return artist_list
 
 
+# Checkfiles can be used to compare output to input (eg IntelliJ has a tool to compare differences between text files).
+# Use Ctrl+D or right-click on the file you want to compare, then select "Compare with..." and choose second file.
 def create_checkfile(artist_list):
     """Create a check file from the object data for comparison with the original file"""
 
