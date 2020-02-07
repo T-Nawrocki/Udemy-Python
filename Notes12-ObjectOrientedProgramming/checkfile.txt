@@ -11,17 +11,22 @@
 1000 Maniacs	Our Time in Eden	1992	Stockton Gala Days
 1000 Maniacs	Our Time in Eden	1992	These Are Days
 1000 Maniacs	Our Time in Eden	1992	Tolerance
+White Zombie	Astro-Creep	2000	Electric Head, Pt. 1 (The Agony)
+White Zombie	Astro-Creep	2000	Super-Charger Heaven
+White Zombie	Astro-Creep	2000	Real Solution #9
+White Zombie	Astro-Creep	2000	Creature Of The Wheel
+White Zombie	Astro-Creep	2000	Electric Head, Pt. 2 (The Ecstasy)
+White Zombie	Astro-Creep	2000	Grease Paint And Monkey Brains
+White Zombie	Astro-Creep	2000	I, Zombie
+White Zombie	Astro-Creep	2000	More Human Than Human
+White Zombie	Astro-Creep	2000	El Phantasmo And The Chicken-Run Blast-O-Rama
+White Zombie	Astro-Creep	2000	Blur The Technicolor
+White Zombie	Astro-Creep	2000	Blood, Milk And Sky
 10cc	The Best Of The Early Years	2002	Rubber Bullets
 10cc	The Best Of The Early Years	2002	The Wall Street Shuffle
 10cc	The Best Of The Early Years	2002	Waterfall
 10cc	The Best Of The Early Years	2002	Headline Hustler
 10cc	The Best Of The Early Years	2002	Somewhere In Hollywood
-10cc	The Best Of The Early Years	2002	Donna
-10cc	The Best Of The Early Years	2002	Ships Don't Disappear In The Night
-10cc	The Best Of The Early Years	2002	Fresh Air For My Mama
-10cc	The Best Of The Early Years	2002	Johnny Don't Do It
-10cc	The Best Of The Early Years	2002	Silly Love
-10cc	The Best Of The Early Years	2002	Sand In My Face
 10cc	The Best Of The Early Years	2002	Speed Kills
 10cc	The Best Of The Early Years	2002	The Hospital Song
 10cc	The Best Of The Early Years	2002	The Dean And I
@@ -31,6 +36,12 @@
 10cc	The Best Of The Early Years	2002	Bee In My Bonnet
 10cc	The Best Of The Early Years	2002	4% Of Something
 10cc	The Best Of The Early Years	2002	Clockwork Creep
+10cc	The Best Of The Early Years	2002	Donna
+10cc	The Best Of The Early Years	2002	Ships Don't Disappear In The Night
+10cc	The Best Of The Early Years	2002	Fresh Air For My Mama
+10cc	The Best Of The Early Years	2002	Johnny Don't Do It
+10cc	The Best Of The Early Years	2002	Silly Love
+10cc	The Best Of The Early Years	2002	Sand In My Face
 AC DC	If You Want Blood, You've Got It	1978	Riff Raff
 AC DC	If You Want Blood, You've Got It	1978	Hell Ain't a Bad Place To Be
 AC DC	If You Want Blood, You've Got It	1978	Bad Boy Boogie
@@ -541,17 +552,6 @@ Warner E Hodges	Gunslinger	2014	Backwater Girl
 Warner E Hodges	Gunslinger	2014	The Hard Way
 Warner E Hodges	Gunslinger	2014	Hell and Back
 Warner E Hodges	Gunslinger	2014	Homage
-White Zombie	Astro-Creep	2000	Electric Head, Pt. 1 (The Agony)
-White Zombie	Astro-Creep	2000	Super-Charger Heaven
-White Zombie	Astro-Creep	2000	Real Solution #9
-White Zombie	Astro-Creep	2000	Creature Of The Wheel
-White Zombie	Astro-Creep	2000	Electric Head, Pt. 2 (The Ecstasy)
-White Zombie	Astro-Creep	2000	Grease Paint And Monkey Brains
-White Zombie	Astro-Creep	2000	I, Zombie
-White Zombie	Astro-Creep	2000	More Human Than Human
-White Zombie	Astro-Creep	2000	El Phantasmo And The Chicken-Run Blast-O-Rama
-White Zombie	Astro-Creep	2000	Blur The Technicolor
-White Zombie	Astro-Creep	2000	Blood, Milk And Sky
 Wishbone Ash	Argus	1972	Time Was
 Wishbone Ash	Argus	1972	Sometime World
 Wishbone Ash	Argus	1972	Blowin' Free

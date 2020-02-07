@@ -5,6 +5,14 @@
 1000 Maniacs	Our Time in Eden	1992	Gold Rush Brides
 1000 Maniacs	Our Time in Eden	1992	How You've Grown
 1000 Maniacs	Our Time in Eden	1992	If You Intend
+White Zombie	Astro-Creep	2000	Electric Head, Pt. 1 (The Agony)
+White Zombie	Astro-Creep	2000	Super-Charger Heaven
+White Zombie	Astro-Creep	2000	Real Solution #9
+White Zombie	Astro-Creep	2000	Creature Of The Wheel
+White Zombie	Astro-Creep	2000	Electric Head, Pt. 2 (The Ecstasy)
+White Zombie	Astro-Creep	2000	Grease Paint And Monkey Brains
+White Zombie	Astro-Creep	2000	I, Zombie
+White Zombie	Astro-Creep	2000	More Human Than Human
 1000 Maniacs	Our Time in Eden	1992	I'm Not The Man
 1000 Maniacs	Our Time in Eden	1992	Jezebel
 1000 Maniacs	Our Time in Eden	1992	Noah's Dove
@@ -16,12 +24,6 @@
 10cc	The Best Of The Early Years	2002	Waterfall
 10cc	The Best Of The Early Years	2002	Headline Hustler
 10cc	The Best Of The Early Years	2002	Somewhere In Hollywood
-10cc	The Best Of The Early Years	2002	Donna
-10cc	The Best Of The Early Years	2002	Ships Don't Disappear In The Night
-10cc	The Best Of The Early Years	2002	Fresh Air For My Mama
-10cc	The Best Of The Early Years	2002	Johnny Don't Do It
-10cc	The Best Of The Early Years	2002	Silly Love
-10cc	The Best Of The Early Years	2002	Sand In My Face
 10cc	The Best Of The Early Years	2002	Speed Kills
 10cc	The Best Of The Early Years	2002	The Hospital Song
 10cc	The Best Of The Early Years	2002	The Dean And I
@@ -92,6 +94,12 @@ Aerosmith	Live! Bootleg	1978	S.O.S.
 Aerosmith	Live! Bootleg	1978	I Ain't Got You
 Aerosmith	Live! Bootleg	1978	Mother Popcorn,Draw The Line
 Aerosmith	Live! Bootleg	1978	Train Kept A Rollin'
+10cc	The Best Of The Early Years	2002	Donna
+10cc	The Best Of The Early Years	2002	Ships Don't Disappear In The Night
+10cc	The Best Of The Early Years	2002	Fresh Air For My Mama
+10cc	The Best Of The Early Years	2002	Johnny Don't Do It
+10cc	The Best Of The Early Years	2002	Silly Love
+10cc	The Best Of The Early Years	2002	Sand In My Face
 Aerosmith	Night In The Ruts	1979	No Surprize
 Aerosmith	Night In The Ruts	1979	Chiquita
 Aerosmith	Night In The Ruts	1979	Remember (Walking In The Sand)
@@ -541,14 +549,6 @@ Warner E Hodges	Gunslinger	2014	Backwater Girl
 Warner E Hodges	Gunslinger	2014	The Hard Way
 Warner E Hodges	Gunslinger	2014	Hell and Back
 Warner E Hodges	Gunslinger	2014	Homage
-White Zombie	Astro-Creep	2000	Electric Head, Pt. 1 (The Agony)
-White Zombie	Astro-Creep	2000	Super-Charger Heaven
-White Zombie	Astro-Creep	2000	Real Solution #9
-White Zombie	Astro-Creep	2000	Creature Of The Wheel
-White Zombie	Astro-Creep	2000	Electric Head, Pt. 2 (The Ecstasy)
-White Zombie	Astro-Creep	2000	Grease Paint And Monkey Brains
-White Zombie	Astro-Creep	2000	I, Zombie
-White Zombie	Astro-Creep	2000	More Human Than Human
 White Zombie	Astro-Creep	2000	El Phantasmo And The Chicken-Run Blast-O-Rama
 White Zombie	Astro-Creep	2000	Blur The Technicolor
 White Zombie	Astro-Creep	2000	Blood, Milk And Sky
