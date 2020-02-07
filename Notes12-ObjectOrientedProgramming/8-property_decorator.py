@@ -1,5 +1,6 @@
-# This is a version of "7-getters_and_setters.py" which uses the property decorator rather than property function
-# to define properties
+# This is a version of "7-getters_and_setters.py" which uses the property decorator
+# rather than property function to define properties (see the score property of Player, in particular)
+
 
 class Player:
     """
@@ -16,7 +17,7 @@ class Player:
         self.name = name
         self._lives = 3
         self._level = 1
-        self.score = 0
+        self._score = 0
         print(f"New player {self.name} created.")
 
     # getter for lives
@@ -50,6 +51,14 @@ class Player:
     lives = property(_get_lives, _set_lives)
     level = property(_get_level, _set_level)
 
+    @property  # getter methods use the @property decorator
+    def score(self):
+        return self._score
+
+    @score.setter  # setter methods use @{property}.setter decorator, and must come after the getter is defined
+    def score(self, score):
+        self._score = score
+
     # __str__ returns a printable version of an object
     # this method overrides the default from the Object class
     def __str__(self):
@@ -69,4 +78,6 @@ if __name__ == '__main__':
     tomek.lives -= 1
     print(tomek)
     tomek.lives -= 1
+    print(tomek)
+    tomek.score = 500
     print(tomek)
