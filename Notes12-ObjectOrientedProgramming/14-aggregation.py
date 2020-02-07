@@ -1,9 +1,16 @@
-# An HTML document is COMPOSED of three components:
-#   (1) a line containing the  HTML version information;
-#   (2) a declarative HEAD section; and
-#   (3) a BODY section, containing the actual content of the document.
+# AGGREGATION is very similar to composition, and is often described as a weaker form of composition.
 
-# So we know that composition would be a good way to represent and handle HTML in python.
+# With composition, the objects that another object is composed of do not exist outside of their container.
+# So in our previous HTML example, the DocType, Head and Body objects which compose the HtmlDoc
+# are only used in the HtmlDoc class, so objects of those types will never exist except as part of an HtmlDoc.
+# When the HtmlDoc is deleted, the DocType, Head and Body objects it is composed of are also deleted.
+
+# To note—we have marked the attributes of HtmlDoc as non-public (_doc_type, _head, _body).
+# In other programming languages, this would mean that we need to change the HtmlDoc class
+# in order to make this program use aggregation rather than composition.
+# However as we know, in Python there isn't really a true "private" state, so really
+# the line between aggregation and composition can get quite blurred.
+# So the important thing is instead to look at the intent behind the code, rather than restrictions in the code itself.
 
 
 class Tag:
@@ -53,9 +60,6 @@ class Body(Tag):
         super().display(file=file)
 
 
-# This is our main example of Composition—the HTML Doc is composed of a DocType, a Head, and a Body
-# none of which are subclasses of HtmlDoc (and nor should they be, given that they share very few if any properties).
-# Here, the class is entirely composed of other classes, but that doesn't have to be the case.
 class HtmlDoc:
 
     def __init__(self, title=None):
@@ -66,13 +70,6 @@ class HtmlDoc:
     def add_tag(self, name, contents):
         self._body.add_tag(name, contents)
 
-    # Delegating display of the components to the component classes themselves.
-    # By calling this method "display", it corresponds to the method in each of the component classes.
-    # It can therefore also be used by any function that displays Tag objects (example of polymorphism).
-    # In fact, the methods of this class are the same as the methods of the Body class, so any function which
-    # can take a Body argument can also take an HtmlDoc as an argument
-    # (meaning we've built a kind of recursion into our program,
-    # where each HtmlDoc can be the Body of another HtmlDoc and so on.)
     def display(self, file=None):
         self._doc_type.display(file=file)
         print("<HTML>", file=file)
@@ -88,4 +85,15 @@ if __name__ == '__main__':
     my_page.add_tag("P", "This is a paragraph which will appear on the page.")
     my_page.add_tag("P", "This is another paragraph which will appear on the page.")
     with open("test.html", "w") as test_doc:
+        my_page.display(file=test_doc)
+
+    new_body = Body()
+    new_body.add_tag("H1", "Aggregation!")
+    new_body.add_tag("P", "Unlike <strong>composition</strong>, aggregation uses existing instances"
+                          " of objects to build up another object.")
+    new_body.add_tag("P", "The composed object doesn't actually own the objects that it's composed of."
+                          " If it's destroyed, those objects continue to exist.")
+
+    my_page._body = new_body
+    with open("test2.html", "w") as test_doc:
         my_page.display(file=test_doc)
