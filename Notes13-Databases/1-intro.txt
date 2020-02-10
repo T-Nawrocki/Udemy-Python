@@ -1,0 +1,74 @@
+This module will be looking in particular at the SQLite database included in the Python standard library.
+
+Databases are an organised collection of data which can be used to store information on a computer,
+    or accessed from a web server over the internet.
+Anything that stores and retrieves inforamtion can be called a database, but usually the term is used to refer to
+    more structured data.
+
+Android and iOS apps pretty commonly make use of a SQLite database in some capacity or other.
+In android, for example, contacts info, text messages, browser history, etc, will all be databases of some type.
+
+Microsoft (SQL Server), Oracle (Oracle) and IBM (DB2) all produce database management systems
+    based on a RELATIONAL DATABASE.
+Data is stored in rows and columns, with rows being a single record and columns being fields that make up that record—
+    eg name, address, date of birth are fields (columns) of a record corresponding to a single person (rows).
+These databases (generally) use SQL (Structured Query Language) to perform operations (eg querying and updating data).
+However, there is now a growing interest in NoSQL databases for big data.
+
+========================================
+
+SQLite is a public domain database engine included in the standard Python library.
+It is also included in Android, so is heavily used in mobile apps, but also applies elsewhere (in fact, it may be
+    the most widely deployed database software in the world, and can't be far off being the most widely deployed
+    software of ANY sort)
+Unlike traditional database management systems like SQL Server and Oracle, SQLite is completely self-contained,
+    meaning it doesn't need its own server to run on.
+
+SQLite was intended to be embedded into systems.
+It uses SQL for operations, so once we know how to use SQLite it will be fairly easy to move on to other SQL databases.
+
+========================================
+
+Obviously, there's a lot to SQL if you want to go really deep on database stuff.
+However, for this course, and for a lot of basic database stuff, you can make do with only 4 commands:
+    SELECT
+    INSERT
+    UPDATE
+    DELETE
+We'll get to what they do and how to use them later on in the course.
+If you were going to do a lot of heavy database work, you'd want to look into SQL more fully and learn about things like
+    NORMALISATION, which aren't going to be covered in this course.
+
+========================================
+
+Some terminology:
+
+    DATABASE:               The container for the data that you store. In SQLite this is a single file, but this is
+                            not the case for most database systems.
+
+    DATABASE DICTIONARY:    A comprehensive list of the structure and types of data in the database (tables and fields).
+                            In SQLite, there's a table called sql_lite_master in each database which contains this data.
+                            You can query this table directly, or there are commands which do it for you.
+
+    TABLE:                  A collection of related data held in a database. Eg a table of contacts, containing name,
+                            address and phone number for a set of people.
+
+    FIELD:                  The basic unit of data in a table—a single cell/column in the record/row.
+                            Comparable to a variable, in many respects—they have a name, which should represent what
+                            the data is, and a type, which restricts what values can be stored (string, int, whatever).
+
+    COLUMN:                 Another name for a FIELD. Note—unlike spreadsheets, COLUMN refers to a single data entry
+                            only, not the entire set of entries for all records. Relational databases predate
+                            spreadsheet programs by about 10 years, so you just have to accept the historical weirdness.
+
+    ROW:                    A single set of data containing all columns in the table.
+
+    RECORD:                 Another name for ROW.
+
+    FLAT FILE DATABASE:     A Database which stores all the data in a single table (a single file).
+                            This can result in a lot of duplication, and makes things difficult to update.
+
+    VIEW:                   A selection of rows and fields, possibly from more than one table. Doesn't have to
+                            use all fields from the rows. In SQLite, the data in a VIEW cannot be updated. That means
+                            you cannot add data to a VIEW and have it reflected in your tables (some other systems
+                            do allow this, albeit with restrictions).

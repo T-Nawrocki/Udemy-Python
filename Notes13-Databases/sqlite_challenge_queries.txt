@@ -1,0 +1,61 @@
+SELECT artists.name, albums.name, songs.track, songs.title 
+FROM artists INNER JOIN albums ON artists._id=albums.artist INNER JOIN songs ON albums._id=songs.album 
+WHERE artists.name LIKE "jefferson%"
+ORDER BY artists.name, albums.name, songs.track;
+
+CREATE VIEW artist_list AS
+SELECT artists.name AS artist, albums.name AS album, songs.track AS track, songs.title AS song
+FROM artists INNER JOIN albums ON artists._id=albums.artist INNER JOIN songs ON albums._id=songs.album 
+ORDER BY artists.name, albums.name, songs.track;
+
+=====
+
+SELECT songs.title
+FROM songs INNER JOIN albums ON albums._id = songs.album
+WHERE albums.name = "Forbidden";
+
+SELECT songs.track, songs.title
+FROM songs INNER JOIN albums ON albums._id = songs.album
+WHERE albums.name = "Forbidden"
+ORDER BY songs.track;
+
+SELECT artists.name, albums.name, songs.track, songs.title 
+FROM artists INNER JOIN albums ON artists._id=albums.artist INNER JOIN songs ON albums._id=songs.album 
+WHERE artists.name = "Deep Purple"
+ORDER BY albums.name, songs.track;
+
+UPDATE artists
+SET name = "One Kitten"
+WHERE name = "Mehitabel";
+
+SELECT * FROM artists WHERE name = "One Kitten";
+
+SELECT songs.title
+FROM songs INNER JOIN albums ON albums._id = songs.album INNER JOIN artists ON artists._id = albums.artist
+WHERE artists.name = "Aerosmith"
+ORDER BY songs.title;
+
+SELECT COUNT(songs.title)
+FROM songs INNER JOIN albums ON albums._id = songs.album INNER JOIN artists ON artists._id = albums.artist
+WHERE artists.name = "Aerosmith"
+ORDER BY songs.title;
+
+SELECT DISTINCT songs.title
+FROM songs INNER JOIN albums ON albums._id = songs.album INNER JOIN artists ON artists._id = albums.artist
+WHERE artists.name = "Aerosmith"
+ORDER BY songs.title;
+
+SELECT COUNT(DISTINCT songs.title)
+FROM songs INNER JOIN albums ON albums._id = songs.album INNER JOIN artists ON artists._id = albums.artist
+WHERE artists.name = "Aerosmith"
+ORDER BY songs.title;
+
+SELECT COUNT(DISTINCT albums.name)
+FROM songs INNER JOIN albums ON albums._id = songs.album INNER JOIN artists ON artists._id = albums.artist
+WHERE artists.name = "Aerosmith"
+ORDER BY songs.title;
+
+SELECT COUNT(DISTINCT artists.name)
+FROM songs INNER JOIN albums ON albums._id = songs.album INNER JOIN artists ON artists._id = albums.artist
+WHERE artists.name = "Aerosmith"
+ORDER BY songs.title;
