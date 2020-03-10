@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="false" />
+    <value-preview-text-wrapping value="true" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -23,23 +23,22 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="94d39eab-09e3-4c03-b6c7-893794dd73f9">
+        <schema name="main" object-types="dataset trigger, table, column, view, constraint, index" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="f3b440de-3a94-4e93-be68-8e2a51fb6ca8">
-      <console name="Accounts" type="STANDARD" schema="main" session="Main"><![CDATA[DELETE FROM history *;]]></console>
+    <connection id="94d39eab-09e3-4c03-b6c7-893794dd73f9">
+      <console name="Music" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="f3b440de-3a94-4e93-be68-8e2a51fb6ca8" />
-  </component>
-  <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="f3b440de-3a94-4e93-be68-8e2a51fb6ca8" dataset="main.transactions" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f3b440de-3a94-4e93-be68-8e2a51fb6ca8" dataset="main.accounts" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="f3b440de-3a94-4e93-be68-8e2a51fb6ca8" dataset="main.history" active-filter-id="EMPTY_FILTER" />
+    <connection id="94d39eab-09e3-4c03-b6c7-893794dd73f9" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -64,9 +63,9 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="f3b440de-3a94-4e93-be68-8e2a51fb6ca8" active="true">
+      <connection id="94d39eab-09e3-4c03-b6c7-893794dd73f9" active="true">
         <database>
-          <name value="Accounts" />
+          <name value="Music" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
@@ -79,7 +78,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="D:\repos\gh\Udemy-Python\Notes13-Databases\accounts.sqlite" schema="main" />
+            <file path="D:\repos\gh\Udemy-Python\Project02-DatabaseGUI\music.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
@@ -109,7 +108,7 @@
           <session-management value="true" />
           <ddl-file-binding value="true" />
           <database-logging value="false" />
-          <connect-automatically value="false" />
+          <connect-automatically value="true" />
           <restore-workspace value="true" />
           <restore-workspace-deep value="true" />
           <environment-type value="default" />
